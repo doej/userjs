@@ -11,6 +11,7 @@
 // @icon			https://gmgmla.dm2301.livefilestore.com/y2pAKJYeZAp4tG23hG68x1mRuEUQXqb1MxdLbuqVnyyuHFxC7ra5Fc-tfq6hD-r9cNnVufT3egUHaimL547xDlESrOVmQsqNSJ5gzaiSccLYzo/ExtendPornHub-logo.png
 // @namespace		649b97180995e878e7e91b2957ef3bbee0f840a0
 // ==/UserScript==
+
 // Block popups
 function NoOpen(e){return 1}
 parent.open=NoOpen;
@@ -143,13 +144,31 @@ var ExtendPH = function ExtendPornHub(){
 		// We create an object and start including its content to include in DOM at the end
 		var ephcss =
 		// Hide ads while we can't remove them
-		"iframe, .home-ad-container, .adblockWhitelisted, .browse-ad-container, .playlist-ad-container, .communityAds, .photo-ad-container, #advertisementBox, .ad_box, .removeAdLink, #videoPageAds, .sectionTitle+div:not(#categoriesStraightImages), .edit-mode+div, .generator-sidebar>.sectionWrapper:first-child, .gifsWrapper>div:first-child {\n\
-			display: none !important;\n\
-		}\n" +
+		"iframe, \
+		.home-ad-container, \
+		.adblockWhitelisted, \
+		.browse-ad-container, \
+		.playlist-ad-container, \
+		.communityAds, \
+		.photo-ad-container, \
+		#advertisementBox, \
+		.ad_box, \
+		.removeAdLink, \
+		#videoPageAds, \
+		.sectionTitle+div:not(#categoriesStraightImages), \
+		.edit-mode+div, \
+		.generator-sidebar>.sectionWrapper:first-child, \
+		.gifsWrapper>div:first-child {\
+			display: none !important;\
+		}" +
 		// Videos Being Watched Right Now in one line + video ads + adBlock bar
-		"ul.row-5-thumbs.videos-being-watched li.omega, #pb_block, .abAlertShown {\n\
-			display: none !important;\n\
-		}\n"
+		"ul.row-5-thumbs.videos-being-watched li.omega, #pb_block, .abAlertShown {\
+			display: none !important;\
+		}" +
+		// Maximum full-width video
+		"div#player {\
+			max-width: 100vw;
+		}"
 
 		// Inject created CSS
 		var ephnode = document.createElement("style")
@@ -159,3 +178,5 @@ var ExtendPH = function ExtendPornHub(){
 		document.head.appendChild(ephnode)
 	}
 }();
+
+// vim: sw=4 noet :
