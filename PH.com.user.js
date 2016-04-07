@@ -1,6 +1,7 @@
 // ==UserScript==
 // @author			Jack_mustang
-// @version			1.10
+// @contributor		doej
+// @version			1.11
 // @name			PH.com
 // @description		Remove ads, enlarges video, stops autoplay keeping buffering & block pop-ups from pornhub.com
 // @date			2015 January 28
