@@ -49,8 +49,8 @@ function changePlayer() {
 		.htmlPauseRoll = false;               \
 		.htmlPostRoll = false;                \
 		.video_unavailable_country = false;   \
-		'.replace(/^/g, 'flashvars_' + vidId);
-	document.head.appendChild(newflashvars);
+		'.replace(/\./g, 'flashvars_' + vidId + '.');
+	document.body.appendChild(newflashvars);
 }
 
 // wait while player doesn't load
@@ -105,6 +105,7 @@ function addStyle() {
 	.photo-ad-container, \
 	#advertisementBox, \
 	.ad_box, \
+	.ad-link, \
 	.removeAdLink, \
 	#videoPageAds, \
 	.sectionTitle+div:not(#categoriesStraightImages), \
@@ -120,6 +121,7 @@ function addStyle() {
 	// Maximum full-width video
 	"div#player {\
 		max-width: 100vw;\
+		max-height: 100vh;\
 	}";
 
 	// Inject created CSS
@@ -131,6 +133,7 @@ function addStyle() {
 }
 
 function main(){
+	changePlayer();
 	// Remove iframes because they are ads
 	removeQuery("iframe:not(#pb_iframe)");
 	// Homepage
@@ -187,16 +190,19 @@ function main(){
 		// Add video download when not logged
 		if( document.body.classList[0].search("logged-in") < 0 ) {
 			var tab = document.querySelector(".download-tab"),
-				dwlinks;
+				dwlinks = '';
 
 			// where are those defined?
-			if(player_quality_720p)
-				dwlinks = '<a class="downloadBtn greyButton" target="_blank" href="'+player_quality_720p+'"><i></i><span>HD</span> 720p</a>';
-			if(player_quality_480p)
-				dwlinks += '<a class="downloadBtn greyButton" target="_blank" href="'+player_quality_480p+'"><i></i>480p</a>';
-			if(player_quality_240p)
-				dwlinks += '<a class="downloadBtn greyButton" target="_blank" href="'+player_quality_240p+'"><i></i>240p</a>';
-
+			var qualities = ['240p', '480p', '720p'];
+			for (var i = 0; i < qualities.length; i++) {
+				var quality = qualities[i];
+				var quality_url = window["player_quality_" + quality];
+				if (quality_url) {
+					dwlinks += '<a class="downloadBtn greyButton" target="_blank" href="' + quality_url + '">' +
+						'<i></i>' + (quality === '720p' ? '<span>HD</span>&nbsp;' : '') +
+						quality + '</a>';
+				}
+			}
 			tab.innerHTML = dwlinks;
 		}
 	}
@@ -205,7 +211,6 @@ function main(){
 var ExtendPH = function ExtendPornHub(){
 
 	addStyle();
-	changePlayer();
 
 	window.addEventListener('DOMContentLoaded', main, false);
 }();
