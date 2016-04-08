@@ -1,7 +1,7 @@
 // ==UserScript==
 // @author			Jack_mustang
 // @contributor		doej
-// @version			1.20
+// @version			1.21
 // @name			PH.com
 // @description		Remove ads, enlarges video, stops autoplay keeping buffering & block pop-ups from pornhub.com
 // @date			2016 April 08
@@ -44,8 +44,6 @@ var FLASH_VARS = {
 function yes(e){ return 1; }
 function blockPopups() {
 	window.open = yes;
-	open        = yes;
-	this.open   = yes;
 	parent.open = yes;
 	// Pop-up killer, we trick PH to think we are old Presto Opera, this kills the pop-ups
 	if (!window.opera)
@@ -223,6 +221,6 @@ function consumeKeyDown(e) {
 blockPopups();
 addStyle();
 window.addEventListener('DOMContentLoaded', main, false);
-document.addEventListener('keydown', consumeKeyDown}, false);
+document.addEventListener('keydown', consumeKeyDown, false);
 
 // vim: sw=4 noet :
